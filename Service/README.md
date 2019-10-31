@@ -6,3 +6,5 @@ This component of the project handles processed and analyzed data and send it to
 - activate virtual environment by typing `source venv/bin/activate`
 - install all dependency in the requirements.txt `pip install -r requirements.txt`
 - run server with the command `python manage.py runserver`
+
+- 
