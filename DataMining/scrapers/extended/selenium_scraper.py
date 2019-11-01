@@ -1,5 +1,3 @@
-from multiprocessing import Pool
-
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -225,10 +223,10 @@ class DataProcessor:
 
 	def safe_casting(self, value, to_type, default=None):
 		"""Cast string to desired type""" 
-	    try:
-	        return to_type(value)
-	    except (ValueError, TypeError):
-	        return default
+		try:
+			return to_type(value)
+		except (ValueError, TypeError):
+			return default
 
 	def safe_json(self, value, output_name='output.json'):
 		"""Save data to json""" 
@@ -236,7 +234,7 @@ class DataProcessor:
 			json.dump(value, outfile)
 
 base_link = 'https://www.smartkarma.com/insights'
-options = ['--headless']
+options = []#['--headless']
 settings = {
 	'primary_timeout': 5,
 	'secondary_timeout': 2,
