@@ -44,13 +44,12 @@ ax.set_ylabel('Adjusted closing price ($)')
 ax.legend()
 
 
-
 df_log = np.log(close)
 def arima_model(p,d,q):
   if (d > 2):
     print("d cannot be more than 2!")
     return None
-  else if (p == 1 and d == 1 and q == 1):
+  elif (p == 1 and d == 1 and q == 1):
     print("p,d & q cannot be all 1!")
     return None
   train_data, test_data = df_log[:int(len(df_log)*0.85)], df_log[int(len(df_log)*0.85):]
@@ -72,7 +71,7 @@ def arima_model(p,d,q):
   plt.ylabel('Price')
   plt.legend(loc='upper left', fontsize=8)
   plt.legend(loc='upper left', fontsize=8)
-  fname = "SNP"+"-"+str(datetime.date.today())+"("+str(p)+","+str(d)+","+str(q)+")"+'-predictions'
+  fname = "SNP"+"-"+str(date.today())+"-("+str(p)+","+str(d)+","+str(q)+")"+'-predictions'
   plt.savefig(fname)
 
 arima_model(3,2,1)
