@@ -47,6 +47,9 @@ ax.legend()
 
 df_log = np.log(close)
 def arima_model(p,d,q):
+  if (d > 2):
+    print("d cannot be more than 2!")
+    return None
   train_data, test_data = df_log[:int(len(df_log)*0.85)], df_log[int(len(df_log)*0.85):]
   model = ARIMA(df_log, order=(p, d, q))
   fitted = model.fit(disp=-1)
