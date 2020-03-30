@@ -72,5 +72,7 @@ def arima_model(p,d,q):
   plt.ylabel('Price')
   plt.legend(loc='upper left', fontsize=8)
   plt.legend(loc='upper left', fontsize=8)
+  fname = "SNP"+"-"+str(datetime.date.today())+"("+str(p)+","+str(d)+","+str(q)+")"+'-predictions'
+  plt.savefig(fname)
 
 arima_model(3,2,1)
