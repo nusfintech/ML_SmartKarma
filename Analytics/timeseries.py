@@ -46,22 +46,25 @@ ax.legend()
 
 
 df_log = np.log(close)
-train_data, test_data = df_log[:int(len(df_log)*0.85)], df_log[int(len(df_log)*0.85):]
-model = ARIMA(df_log, order=(3, 2, 1))
-fitted = model.fit(disp=-1)
-fc, se, conf = fitted.forecast(len(test_data), alpha=0.05)
-future_index = pd.date_range(start = date.today(),periods= len(test_data))
-fc_series = pd.Series(fc, index=future_index)
-lower_series = pd.Series(conf[:, 0], index=future_index)
-upper_series = pd.Series(conf[:, 1], index=future_index)
-# Plot
-plt.figure(figsize=(16,9), dpi=72)
-plt.plot(np.exp(df_log), label='training')
-plt.plot(np.exp(fc_series), color = 'orange',label='Future Predicted Stock Price')
-plt.fill_between(lower_series.index, np.exp(lower_series), np.exp(upper_series), 
-                    color='k', alpha=.10)
-plt.title('S & P 500 Index Price Prediction')
-plt.xlabel('Time')
-plt.ylabel('Price')
-plt.legend(loc='upper left', fontsize=8)
-plt.legend(loc='upper left', fontsize=8)
+def arima_model(p,d,q):
+  train_data, test_data = df_log[:int(len(df_log)*0.85)], df_log[int(len(df_log)*0.85):]
+  model = ARIMA(df_log, order=(p, d, q))
+  fitted = model.fit(disp=-1)
+  fc, se, conf = fitted.forecast(len(test_data), alpha=0.05)
+  future_index = pd.date_range(start = date.today(),periods= len(test_data))
+  fc_series = pd.Series(fc, index=future_index)
+  lower_series = pd.Series(conf[:, 0], index=future_index)
+  upper_series = pd.Series(conf[:, 1], index=future_index)
+  # Plot
+  plt.figure(figsize=(16,9), dpi=72)
+  plt.plot(np.exp(df_log), label='training')
+  plt.plot(np.exp(fc_series), color = 'orange',label='Future Predicted Stock Price')
+  plt.fill_between(lower_series.index, np.exp(lower_series), np.exp(upper_series), 
+                      color='k', alpha=.10)
+  plt.title('S & P 500 Index Price Prediction')
+  plt.xlabel('Time')
+  plt.ylabel('Price')
+  plt.legend(loc='upper left', fontsize=8)
+  plt.legend(loc='upper left', fontsize=8)
+
+arima_model(3,2,1)
