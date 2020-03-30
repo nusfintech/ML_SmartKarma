@@ -50,6 +50,9 @@ def arima_model(p,d,q):
   if (d > 2):
     print("d cannot be more than 2!")
     return None
+  else if (p == 1 and d == 1 and q == 1):
+    print("p,d & q cannot be all 1!")
+    return None
   train_data, test_data = df_log[:int(len(df_log)*0.85)], df_log[int(len(df_log)*0.85):]
   model = ARIMA(df_log, order=(p, d, q))
   fitted = model.fit(disp=-1)
